@@ -28,7 +28,7 @@ const contactInfo = [
 ];
 
 const socialLinks = [
-  { icon: Linkedin, href: "#", label: "LinkedIn" },
+  { icon: Linkedin, href: "https://www.linkedin.com/in/ashish-yadav-ab206124a/", label: "LinkedIn" },
   { icon: Github, href: "#", label: "GitHub" },
   { icon: Facebook, href: "https://www.facebook.com/robbert.jessy/", label: "Facebook" },
 ];
