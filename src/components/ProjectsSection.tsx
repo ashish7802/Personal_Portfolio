@@ -170,23 +170,30 @@ const ProjectsSection = () => {
             return (
               <motion.div
                 key={project.title}
-                initial={{ opacity: 0, y: 50 }}
-                animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
+                initial={{ opacity: 0, y: 50, scale: 0.9 }}
+                animate={isInView ? { opacity: 1, y: 0, scale: 1 } : {}}
+                transition={{ duration: 0.5, delay: index * 0.1, type: "spring", stiffness: 100 }}
                 layout
+                whileHover={{ y: -10 }}
                 className={`group glass-card overflow-hidden ${colors.border} ${colors.glow} transition-all duration-500`}
               >
                 {/* Image */}
                 <div className="relative h-48 overflow-hidden">
-                  <img
+                  <motion.img
                     src={project.image}
                     alt={project.title}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                    className="w-full h-full object-cover"
+                    whileHover={{ scale: 1.15 }}
+                    transition={{ duration: 0.4 }}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent" />
-                  <div className={`absolute top-4 right-4 p-2 rounded-lg ${colors.bg}`}>
+                  <motion.div 
+                    className={`absolute top-4 right-4 p-2 rounded-lg ${colors.bg}`}
+                    whileHover={{ rotate: 360, scale: 1.2 }}
+                    transition={{ duration: 0.5 }}
+                  >
                     <Icon className={`w-5 h-5 ${colors.icon}`} />
-                  </div>
+                  </motion.div>
                 </div>
 
                 {/* Content */}
@@ -200,23 +207,31 @@ const ProjectsSection = () => {
 
                   {/* Tech Stack */}
                   <div className="flex flex-wrap gap-2 mb-4">
-                    {project.tech.map((tech) => (
-                      <span
+                    {project.tech.map((tech, techIndex) => (
+                      <motion.span
                         key={tech}
-                        className="px-2 py-1 text-xs font-mono bg-muted rounded-md text-muted-foreground"
+                        initial={{ opacity: 0, scale: 0.8 }}
+                        animate={isInView ? { opacity: 1, scale: 1 } : {}}
+                        transition={{ delay: index * 0.1 + techIndex * 0.05 + 0.3 }}
+                        whileHover={{ scale: 1.1, y: -2 }}
+                        className="px-2 py-1 text-xs font-mono bg-muted rounded-md text-muted-foreground hover:text-primary hover:bg-primary/10 transition-colors cursor-pointer"
                       >
                         {tech}
-                      </span>
+                      </motion.span>
                     ))}
                   </div>
 
                   {/* Status */}
                   <div className="flex items-center justify-between">
-                    <span className={`text-xs font-mono ${colors.icon}`}>
+                    <motion.span 
+                      className={`text-xs font-mono ${colors.icon}`}
+                      animate={{ opacity: [0.5, 1, 0.5] }}
+                      transition={{ duration: 2, repeat: Infinity }}
+                    >
                       {project.status}
-                    </span>
+                    </motion.span>
                     <motion.button
-                      whileHover={{ scale: 1.1 }}
+                      whileHover={{ scale: 1.2, rotate: 15 }}
                       whileTap={{ scale: 0.95 }}
                       className={`p-2 rounded-lg ${colors.bg} ${colors.icon} opacity-0 group-hover:opacity-100 transition-opacity`}
                     >

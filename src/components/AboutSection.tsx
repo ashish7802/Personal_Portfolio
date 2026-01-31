@@ -87,15 +87,20 @@ const AboutSection = () => {
               ].map((stat, index) => (
                 <motion.div
                   key={stat.label}
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={isInView ? { opacity: 1, scale: 1 } : {}}
-                  transition={{ duration: 0.4, delay: 0.8 + index * 0.1 }}
-                  className="text-center p-4"
+                  initial={{ opacity: 0, scale: 0.8, rotateY: 90 }}
+                  animate={isInView ? { opacity: 1, scale: 1, rotateY: 0 } : {}}
+                  transition={{ duration: 0.6, delay: 0.8 + index * 0.15, type: "spring" }}
+                  whileHover={{ scale: 1.1, y: -5 }}
+                  className="text-center p-4 cursor-pointer group"
                 >
-                  <div className="text-2xl md:text-3xl font-bold gradient-text mb-1">
+                  <motion.div 
+                    className="text-2xl md:text-3xl font-bold gradient-text mb-1"
+                    animate={isInView ? { scale: [1, 1.2, 1] } : {}}
+                    transition={{ delay: 1.5 + index * 0.2, duration: 0.5 }}
+                  >
                     {stat.value}
-                  </div>
-                  <div className="text-xs md:text-sm text-muted-foreground font-mono">
+                  </motion.div>
+                  <div className="text-xs md:text-sm text-muted-foreground font-mono group-hover:text-primary transition-colors">
                     {stat.label}
                   </div>
                 </motion.div>

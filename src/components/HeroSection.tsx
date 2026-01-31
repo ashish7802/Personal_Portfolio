@@ -113,27 +113,52 @@ const HeroSection = () => {
           transition={{ duration: 0.6, delay: 0.6 }}
           className="flex flex-col sm:flex-row items-center justify-center gap-4"
         >
-          <Button
-            size="lg"
-            onClick={handleScrollToProjects}
-            className="group bg-primary hover:bg-primary/90 text-primary-foreground font-mono px-8 py-6 text-base relative overflow-hidden"
+          <motion.div
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
           >
-            <span className="relative z-10 flex items-center gap-2">
-              View Projects
-              <ExternalLink className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-            </span>
-            <div className="absolute inset-0 bg-gradient-to-r from-primary via-secondary to-primary bg-[length:200%_100%] opacity-0 group-hover:opacity-100 transition-opacity animate-pulse" />
-          </Button>
+            <Button
+              size="lg"
+              onClick={handleScrollToProjects}
+              className="group bg-primary hover:bg-primary/90 text-primary-foreground font-mono px-8 py-6 text-base relative overflow-hidden"
+            >
+              <span className="relative z-10 flex items-center gap-2">
+                View Projects
+                <motion.span
+                  animate={{ x: [0, 5, 0] }}
+                  transition={{ duration: 1.5, repeat: Infinity }}
+                >
+                  <ExternalLink className="w-4 h-4" />
+                </motion.span>
+              </span>
+              <motion.div 
+                className="absolute inset-0 bg-gradient-to-r from-primary via-secondary to-primary bg-[length:200%_100%]"
+                animate={{ backgroundPosition: ["0% 0%", "100% 0%", "0% 0%"] }}
+                transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+                style={{ opacity: 0.3 }}
+              />
+            </Button>
+          </motion.div>
 
-          <Button
-            size="lg"
-            variant="outline"
-            onClick={handleScrollToContact}
-            className="group border-primary/50 text-primary hover:bg-primary/10 font-mono px-8 py-6 text-base"
+          <motion.div
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
           >
-            <Mail className="w-4 h-4 mr-2 transition-transform group-hover:scale-110" />
-            Contact Me
-          </Button>
+            <Button
+              size="lg"
+              variant="outline"
+              onClick={handleScrollToContact}
+              className="group border-primary/50 text-primary hover:bg-primary/10 font-mono px-8 py-6 text-base"
+            >
+              <motion.span
+                animate={{ scale: [1, 1.2, 1] }}
+                transition={{ duration: 2, repeat: Infinity }}
+              >
+                <Mail className="w-4 h-4 mr-2" />
+              </motion.span>
+              Contact Me
+            </Button>
+          </motion.div>
         </motion.div>
 
         {/* Scroll Indicator */}

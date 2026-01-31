@@ -109,17 +109,22 @@ const SkillsSection = () => {
             return (
               <motion.div
                 key={category.title}
-                initial={{ opacity: 0, y: 50 }}
-                animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.6, delay: index * 0.15 }}
+                initial={{ opacity: 0, y: 50, rotateX: -15 }}
+                animate={isInView ? { opacity: 1, y: 0, rotateX: 0 } : {}}
+                transition={{ duration: 0.6, delay: index * 0.15, type: "spring", stiffness: 100 }}
+                whileHover={{ y: -10, scale: 1.02 }}
                 className={`glass-card p-6 md:p-8 border ${colors.border} ${colors.glow} transition-all duration-500 group`}
               >
                 {/* Header */}
                 <div className="flex items-center gap-4 mb-6">
-                  <div className={`p-3 rounded-xl ${colors.bg}`}>
+                  <motion.div 
+                    className={`p-3 rounded-xl ${colors.bg}`}
+                    whileHover={{ rotate: 360, scale: 1.2 }}
+                    transition={{ duration: 0.5 }}
+                  >
                     <Icon className={`w-6 h-6 ${colors.icon}`} />
-                  </div>
-                  <h3 className="text-xl font-bold text-foreground">
+                  </motion.div>
+                  <h3 className="text-xl font-bold text-foreground group-hover:text-primary transition-colors">
                     {category.title}
                   </h3>
                 </div>
@@ -129,15 +134,19 @@ const SkillsSection = () => {
                   {category.skills.map((skill, skillIndex) => (
                     <motion.li
                       key={skill}
-                      initial={{ opacity: 0, x: -20 }}
+                      initial={{ opacity: 0, x: -30 }}
                       animate={isInView ? { opacity: 1, x: 0 } : {}}
                       transition={{
                         duration: 0.4,
-                        delay: index * 0.15 + skillIndex * 0.05 + 0.3,
+                        delay: index * 0.15 + skillIndex * 0.08 + 0.3,
                       }}
-                      className="flex items-center gap-3 text-muted-foreground group-hover:text-foreground transition-colors"
+                      whileHover={{ x: 10, scale: 1.02 }}
+                      className="flex items-center gap-3 text-muted-foreground group-hover:text-foreground transition-colors cursor-pointer"
                     >
-                      <span className={`w-2 h-2 rounded-full ${colors.bg} ${colors.icon}`} />
+                      <motion.span 
+                        className={`w-2 h-2 rounded-full ${colors.bg} ${colors.icon}`}
+                        whileHover={{ scale: 2 }}
+                      />
                       <span className="font-mono text-sm">{skill}</span>
                     </motion.li>
                   ))}
